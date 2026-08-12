@@ -1,28 +1,57 @@
 {% extends 'core/base.html' %}
 {% block content %}
-    <h2>Tags <a href="{% url 'core:tag-create' %}" class="btn btn-primary" style="float: right;">Add Tag</a></h2>
-    <hr>
-    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr style="background: #f4f4f4;">
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for tag in tags %}
-                <tr>
-                    <td>{{ tag.name }}</td>
-                    <td>
-                        <a href="{% url 'core:tag-update' tag.id %}">Update</a> |
-                        <a href="{% url 'core:tag-delete' tag.id %}" style="color: red;">Delete</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="2">No tags created yet.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container-fluid" style="max-width: 900px;">
+    <!-- Header Block -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Tags Management</h2>
+            <p class="text-muted small mb-0">Organize and group your system task definitions</p>
+        </div>
+        <a href="{% url 'core:tag-create' %}" class="btn btn-dark d-flex align-items-center gap-2 px-4 shadow-sm">
+            <span>🏷️</span> Add New Tag
+        </a>
+    </div>
+
+    <!-- Data Display Framework Table Container -->
+    <div class="card shadow-sm border-0">
+        <div class="table-responsive rounded">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="ps-4 py-3 text-secondary text-uppercase fs-7 tracking-wider" style="width: 70%;">Tag Name</th>
+                        <th scope="col" class="pe-4 py-3 text-secondary text-uppercase fs-7 tracking-wider text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in tags %}
+                        <tr>
+                            <!-- Content Name Parameter -->
+                            <td class="ps-4 fw-medium text-dark">
+                                <span class="font-monospace text-muted me-1">#</span>{{ tag.name }}
+                            </td>
+                            <!-- Action Direct Target Navigation Triggers -->
+                            <td class="pe-4 text-end">
+                                <div class="d-inline-flex gap-2">
+                                    <a href="{% url 'core:tag-update' tag.id %}" class="btn btn-sm btn-outline-primary px-3">
+                                        Update
+                                    </a>
+                                    <a href="{% url 'core:tag-delete' tag.id %}" class="btn btn-sm btn-outline-danger px-3">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <!-- Fallback Table Line Item State Component -->
+                        <tr>
+                            <td colspan="2" class="text-center text-muted py-4 fst-italic">
+                                No classification tags found. Click 'Add New Tag' to populate one.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

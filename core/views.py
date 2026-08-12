@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_urlencoded, redirect
+from django.shortcuts import get_object_or_urlencoded, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from core.models import Task, Tag
+from .models import Task, Tag
+from .forms import TaskForm  # Import your new form here
 
 
 # --- TASK VIEWS ---
@@ -11,18 +12,19 @@ class TaskListView(generic.ListView):
     context_object_name = "tasks"
 
 
+# Keep all your other existing views (TaskListView, TaskDeleteView, Tag views, etc.) exactly the same!
 class TaskCreateView(generic.CreateView):
     model = Task
-    fields = ["content", "deadline", "tags"]
+    form_class = TaskForm  # Replaces fields = [...]
     template_name = "core/task_form.html"
-    success_url = reverse_lazy("core:index")
+    success_url = reverse_lazy('core:index')
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
-    fields = ["content", "deadline", "tags"]
+    form_class = TaskForm  # Replaces fields = [...]
     template_name = "core/task_form.html"
-    success_url = reverse_lazy("core:index")
+    success_url = reverse_lazy('core:index')
 
 
 class TaskDeleteView(generic.DeleteView):

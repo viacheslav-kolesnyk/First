@@ -1,30 +1,77 @@
 {% extends 'core/base.html' %}
 {% block content %}
-    <h2>Todo List <a href="{% url 'core:task-create' %}" class="btn btn-primary" style="float: right;">Add Task</a></h2>
-    <hr>
-    {% for task in tasks %}
-        <div class="task-card">
-            <h3>
-                {{ task.content }}
-                {% if task.is_done %}
-                    <span style="color: green;">(Done)</span>
-                {% endif %}
-            </h3>
-            <p>Created: {{ task.created_at|date:"Y-m-d H:i" }}</p>
-            {% if task.deadline %}
-                <p style="color: red;">Deadline: {{ task.deadline|date:"Y-m-d H:i" }}</p>
-            {% endif %}
-            <p class="tags">Tags: {% for tag in task.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% empty %}None{% endfor %}</p>
-
-            <div style="margin-top: 10px;">
-                <a href="{% url 'core:task-toggle' task.id %}" class="btn btn-primary">
-                    {% if task.is_done %}Undo{% else %}Complete{% endif %}
-                </a>
-                <a href="{% url 'core:task-update' task.id %}" style="margin-left: 10px;">Update</a>
-                <a href="{% url 'core:task-delete' task.id %}" style="margin-left: 10px; color: red;">Delete</a>
-            </div>
+<div class="container-fluid">
+    <!-- Header Block -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Todo List</h2>
+            <p class="text-muted small mb-0">Manage your active and finished tasks</p>
         </div>
-    {% empty %}
-        <p>No tasks yet!</p>
-    {% endfor %}
+        <a href="{% url 'core:task-create' %}" class="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-sm">
+            <span>➕</span> Add New Task
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-xl-10">
+            {% for task in tasks %}
+                <!-- Task Card Layout: adds an indicator bar on the left side based on state -->
+                <div class="card shadow-sm border-0 border-start border-4 mb-3 {% if task.is_done %}border-success opacity-75{% else %}border-warning{% endif %}">
+                    <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+
+                        <!-- Details Content Frame -->
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                <h3 class="h5 mb-0 text-dark {% if task.is_done %}text-decoration-line-through text-muted{% endif %}">
+                                    {{ task.content }}
+                                </h3>
+                                {% if task.is_done %}
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">Done</span>
+                                {% else %}
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill">Pending</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Date Information Strings -->
+                            <div class="d-flex gap-3 text-muted small flex-wrap">
+                                <span>📅 Created: {{ task.created_at|date:"Y-m-d H:i" }}</span>
+                                {% if task.deadline %}
+                                    <span class="text-danger fw-medium">⏰ Deadline: {{ task.deadline|date:"Y-m-d H:i" }}</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Internal Tag Collections Layout -->
+                            <div class="mt-2 d-flex flex-wrap gap-1">
+                                {% for tag in task.tags.all %}
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary rounded-1 small font-monospace">#{{ tag.name }}</span>
+                                {% empty %}
+                                    <span class="text-muted small fst-italic">No tags</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Context Control Form Interfaces -->
+                        <div class="d-flex align-items-center gap-2 struct-actions">
+                            <a href="{% url 'core:task-toggle' task.id %}" class="btn {% if task.is_done %}btn-outline-secondary{% else %}btn-success{% endif %} btn-sm px-3 fw-semibold">
+                                {% if task.is_done %}Undo{% else %}Complete{% endif %}
+                            </a>
+                            <a href="{% url 'core:task-update' task.id %}" class="btn btn-light btn-sm border text-primary">
+                                Edit
+                            </a>
+                            <a href="{% url 'core:task-delete' task.id %}" class="btn btn-light btn-sm border text-danger">
+                                Delete
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            {% empty %}
+                <!-- Fallback Screen State Component -->
+                <div class="text-center py-5 bg-white rounded shadow-sm border">
+                    <p class="text-muted mb-0 fs-5">🎉 Hooray! There are no tasks in your tracker list.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
