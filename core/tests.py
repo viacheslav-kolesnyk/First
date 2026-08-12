@@ -83,7 +83,7 @@ class FirstListTests(TestCase):
 
     def test_task_list_page_contains_required_elements(self):
         """Confirms template base structural markup contents render successfully."""
-        response = self.client.get(reverse('core:index'))
+        response = self.client.get(reverse("core:index"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Todo List")
         self.assertContains(response, "Add New Task")

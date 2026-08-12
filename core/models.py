@@ -4,7 +4,7 @@ from django.db import models
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
-    def __clil_str__(self):
+    def __str__(self):
         return self.name
 
 

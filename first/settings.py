@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
-    'crispy_forms',
-    'crispy_bootstrap5',
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'first.urls'
+ROOT_URLCONF = "first.urls"
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ WSGI_APPLICATION = "first.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": 'django.db.backends.sqlite3',
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
