@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+{% block content %}
+    <h2>Todo List <a href="{% url 'core:task-create' %}" class="btn btn-primary" style="float: right;">Add Task</a></h2>
+    <hr>
+    {% for task in tasks %}
+        <div class="task-card">
+            <h3>
+                {{ task.content }}
+                {% if task.is_done %}
+                    <span style="color: green;">(Done)</span>
+                {% endif %}
+            </h3>
+            <p>Created: {{ task.created_at|date:"Y-m-d H:i" }}</p>
+            {% if task.deadline %}
+                <p style="color: red;">Deadline: {{ task.deadline|date:"Y-m-d H:i" }}</p>
+            {% endif %}
+            <p class="tags">Tags: {% for tag in task.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% empty %}None{% endfor %}</p>
 
-</body>
-</html>
+            <div style="margin-top: 10px;">
+                <a href="{% url 'core:task-toggle' task.id %}" class="btn btn-primary">
+                    {% if task.is_done %}Undo{% else %}Complete{% endif %}
+                </a>
+                <a href="{% url 'core:task-update' task.id %}" style="margin-left: 10px;">Update</a>
+                <a href="{% url 'core:task-delete' task.id %}" style="margin-left: 10px; color: red;">Delete</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No tasks yet!</p>
+    {% endfor %}
+{% endblock %}

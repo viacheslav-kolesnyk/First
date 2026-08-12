@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'core/base.html' %}
+{% block content %}
+    <h2>Delete Tag</h2>
+    <p>Are you sure you want to delete "{{ object.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'core:tag-list' %}" style="margin-left:10px;">Cancel</a>
+    </form>
+{% endblock %}

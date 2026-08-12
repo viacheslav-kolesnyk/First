@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Todo List</title>
+    <style>
+        body { display: flex; font-family: sans-serif; margin: 0; }
+        .sidebar { width: 200px; background: #f4f4f4; height: 100vh; padding: 20px; border-right: 1px solid #ccc; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin-bottom: 15px; }
+        .content { flex: 1; padding: 20px; }
+        .task-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 4px; }
+        .tags { color: gray; font-size: 0.9em; }
+        .btn { padding: 5px 10px; text-decoration: none; border-radius: 3px; display: inline-block; }
+        .btn-primary { background: blue; color: white; }
+        .btn-danger { background: red; color: white; }
+    </style>
 </head>
 <body>
-
+    <div class="sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="{% url "core:index" %}">Home Page</a></li>
+            <li><a href="{% url 'core:tag-list' %}">Tag List Page</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

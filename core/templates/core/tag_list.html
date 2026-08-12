@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'core/base.html' %}
+{% block content %}
+    <h2>Tags <a href="{% url 'core:tag-create' %}" class="btn btn-primary" style="float: right;">Add Tag</a></h2>
+    <hr>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f4f4f4;">
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tag in tags %}
+                <tr>
+                    <td>{{ tag.name }}</td>
+                    <td>
+                        <a href="{% url 'core:tag-update' tag.id %}">Update</a> |
+                        <a href="{% url 'core:tag-delete' tag.id %}" style="color: red;">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No tags created yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
