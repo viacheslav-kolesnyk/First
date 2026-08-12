@@ -3,11 +3,13 @@ from django.urls import reverse_lazy
 from django.views import generic
 from core.models import Task, Tag
 
+
 # --- TASK VIEWS ---
 class TaskListView(generic.ListView):
     model = Task
     template_name = "core/index.html"
     context_object_name = "tasks"
+
 
 class TaskCreateView(generic.CreateView):
     model = Task
@@ -15,16 +17,19 @@ class TaskCreateView(generic.CreateView):
     template_name = "core/task_form.html"
     success_url = reverse_lazy("core:index")
 
+
 class TaskUpdateView(generic.UpdateView):
     model = Task
     fields = ["content", "deadline", "tags"]
     template_name = "core/task_form.html"
     success_url = reverse_lazy("core:index")
 
+
 class TaskDeleteView(generic.DeleteView):
     model = Task
     template_name = "core/task_confirm_delete.html"
     success_url = reverse_lazy("core:index")
+
 
 def toggle_task_status(request, pk):
     task = get_object_or_404(Task, pk=pk)
@@ -39,17 +44,20 @@ class TagListView(generic.ListView):
     template_name = "core/tag_list.html"
     context_object_name = "tags"
 
+
 class TagCreateView(generic.CreateView):
     model = Tag
     fields = ["name"]
     template_name = "core/tag_form.html"
     success_url = reverse_lazy("core:tag-list")
 
+
 class TagUpdateView(generic.UpdateView):
     model = Tag
     fields = ['name']
     template_name = "core/tag_form.html"
     success_url = reverse_lazy("core:tag-list")
+
 
 class TagDeleteView(generic.DeleteView):
     model = Tag
