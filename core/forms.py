@@ -1,6 +1,7 @@
 from django import forms
 from core.models import Task, Tag
 
+
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task

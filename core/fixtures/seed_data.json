@@ -1,0 +1,56 @@
+[
+  {
+    "model": "core.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Work"
+    }
+  },
+  {
+    "model": "core.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Urgent"
+    }
+  },
+  {
+    "model": "core.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Personal"
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 1,
+    "fields": {
+      "content": "Prepare presentation slides for the team review meeting",
+      "created_at": "2026-08-12T09:00:00Z",
+      "deadline": "2026-08-14T17:00:00Z",
+      "is_done": false,
+      "tags": [1, 2]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 2,
+    "fields": {
+      "content": "Buy fresh groceries and meal prep for the upcoming week",
+      "created_at": "2026-08-11T14:30:00Z",
+      "deadline": "2026-08-13T20:00:00Z",
+      "is_done": false,
+      "tags": [3]
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 3,
+    "fields": {
+      "content": "Complete initial project setup and initialize GitHub repository tracking",
+      "created_at": "2026-08-10T08:00:00Z",
+      "deadline": "2026-08-12T12:00:00Z",
+      "is_done": true,
+      "tags": [1]
+    }
+  }
+]
