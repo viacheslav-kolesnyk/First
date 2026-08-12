@@ -1,5 +1,5 @@
 from django import forms
-from core.models import Task, Tag
+from core.models import Task
 
 
 class TaskForm(forms.ModelForm):
