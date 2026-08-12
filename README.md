@@ -100,3 +100,6 @@ Per project specifications, ensure you complete the following steps on GitHub:
 3. Take screenshots of your workspace screens (Home board, Tag views, creation menus).
 4. **Drag-and-drop the interface images directly into the PR description body text block** (do not embed external hosting or cloud links).
 5. Paste the final GitHub Pull Request link inside your assignment solution input box.
+
+![Home page](images/home_page.png)
+![Tags page](images/tags_page.png)
