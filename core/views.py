@@ -12,17 +12,16 @@ class TaskListView(generic.ListView):
     context_object_name = "tasks"
 
 
-# Keep all your other existing views (TaskListView, TaskDeleteView, Tag views, etc.) exactly the same!
 class TaskCreateView(generic.CreateView):
     model = Task
-    form_class = TaskForm  # Replaces fields = [...]
+    form_class = TaskForm
     template_name = "core/task_form.html"
     success_url = reverse_lazy("core:index")
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
-    form_class = TaskForm  # Replaces fields = [...]
+    form_class = TaskForm
     template_name = "core/task_form.html"
     success_url = reverse_lazy("core:index")
 
